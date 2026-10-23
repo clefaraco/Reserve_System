@@ -60,12 +60,17 @@ export function DialogProvider({ children }: { children: ReactNode }) {
   }
   useEffect(() => {
     const dialog = element.current
+    const opener =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null
     if (active && dialog && !dialog.open) {
       dialog.showModal()
       initialFocus.current?.focus()
     }
     return () => {
       if (dialog?.open) dialog.close()
+      if (opener?.isConnected) opener.focus()
     }
   }, [active?.id])
   useEffect(

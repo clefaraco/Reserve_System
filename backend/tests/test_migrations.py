@@ -60,7 +60,7 @@ def test_incremental_migrations_preserve_bookings_repeat_and_reject_tampering(
                 conn.execute("SELECT count(*) FROM healthsync.audit_events").fetchone()[0]
                 == original_audit
             )
-            assert conn.execute("SELECT count(*) FROM migration_meta.versions").fetchone()[0] == 2
+            assert conn.execute("SELECT count(*) FROM migration_meta.versions").fetchone()[0] == 3
             # A changed applied migration is rejected instead of silently replayed.
             (tmp_path / "database").mkdir()
             target = tmp_path / "database/003_organization_and_workspaces.sql"

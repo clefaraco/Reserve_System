@@ -15,7 +15,13 @@ from .db import audit, many, one, staff_role, transaction
 
 router = APIRouter()
 CAPABILITIES = {
-    "admin": ["organization.read", "calendar.read", "attendance.write", "reports.read"],
+    "admin": [
+        "organization.read",
+        "calendar.read",
+        "attendance.write",
+        "reports.read",
+        "team.manage",
+    ],
     "scheduler": ["organization.read", "calendar.read", "attendance.write", "reports.read"],
     "reception": ["organization.read", "calendar.read", "attendance.write", "reports.read"],
     "clinician": ["organization.read", "calendar.read", "attendance.write", "reports.read"],
@@ -301,6 +307,9 @@ async def platform_directory(
     request: Request, principal: Principal | None = Depends(optional_principal)
 ):
     require_user(principal)
+    from .auth import verify_staff_session
+
+    await verify_staff_session(principal)
     async with db.pool.connection() as conn, conn.transaction():
         await conn.execute("SELECT set_config('app.actor_id',%s,true)", (str(principal.subject),))
         await conn.execute("SELECT set_config('app.tenant_id','',true)")

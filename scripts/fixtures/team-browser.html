@@ -1,0 +1,4 @@
+<!doctype html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><div id="root"></div><script type="module">
+import React from 'react';import{createRoot}from'react-dom/client';import{Team}from'/src/Team.tsx';import{DialogProvider}from'/src/Dialog.tsx';import'/src/styles.css';
+createRoot(document.getElementById('root')).render(React.createElement(DialogProvider,null,React.createElement('main',{className:'mx-auto max-w-5xl p-4 sm:p-8'},React.createElement('h1',{className:'text-2xl font-semibold mb-3'},'Medical Appointment System · Tresuryx SpA'),React.createElement('p',{className:'mb-6 text-sm text-slate-600'},'Demostración ficticia de S01. API simulada en el navegador; pruebas del servidor independientes en PostgreSQL temporal.'),React.createElement(Team,{token:'synthetic-browser-test-token'}))))
+</script></body></html>

@@ -93,3 +93,9 @@ simulado. No publiques datos privados ni credenciales en GitHub.
 ```
 
 Una buena instrucción concreta: “Permitir a recepción registrar la llegada de un paciente en sus sucursales, con confirmación modal, evitando duplicados y sin que pueda cerrar clínicamente la consulta”. Una petición como “haz todo el sistema completo” necesita dividirse en entregas verificables, conservando un mapa global como estos documentos.
+
+## Actualización S00/S01 · entrega de revisión
+
+Antes de preparar otra solicitud, leer [planificación persistente](planning/README.md), su `backlog.json`, decisiones y evidencia. S00–S15 se conservan con requisitos originales; no crear otra lista maestra en el chat.
+
+La rama S00/S01 agrega migración 005, invitaciones/equipo, versiones, último administrador concurrente, MFA obligatorio del personal y adaptador de correo apagado. Ver [estado comprobado y bloqueos](planning/VALIDATION_S00_S01.md) y [procedimiento](team-access.md). Auth/MFA/correo reales siguen pendientes; no hay privilegios demo ni despliegue. Pagos: Transbank/Mercado Pago primeras opciones; Flow, Khipu, Compraquí, bancos y otros conservados en S13, solo documentación. S01 no se considera terminada mientras falte validar la integración externa autorizada.

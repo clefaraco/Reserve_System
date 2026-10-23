@@ -25,7 +25,7 @@ Antes de habilitar profesionales que atiendan en varias sedes, agregar una ident
 | Perfil | Responsabilidad final | Estado actual |
 | --- | --- | --- |
 | Administrador SaaS de Tresuryx | Organizaciones, planes, módulos contratados, límites, operación del servicio, soporte y suscripciones | Directorio de tenants protegido por identidad global, acceso auditado; gestión comercial pendiente |
-| Administrador del tenant | Organización, sedes, profesionales, servicios, agendas, usuarios, permisos, políticas e integraciones de la clínica | Acceso al espacio operativo, estructura visible, agenda, registro de asistencia y resumen; edición completa pendiente |
+| Administrador del tenant | Organización, sedes, profesionales, servicios, agendas, usuarios, permisos, políticas e integraciones de la clínica | Acceso al espacio operativo, estructura visible, agenda, registro de asistencia y resumen; Equipo (invitaciones/perfiles/alcances/bajas) preparado; Auth/MFA/correo reales pendientes, edición del resto pendiente |
 | Coordinador de agenda | Reservas y cambios dentro de sucursales asignadas | Consulta de agenda y cambios protegidos por alcance; gestión avanzada pendiente |
 | Recepción | Llegada de pacientes, agenda diaria, confirmaciones, anulaciones e inasistencia | Agenda scoped, check-in e inasistencia; no puede cerrar clínicamente una atención |
 | Médico/profesional | Su calendario, pacientes citados, cierre de atención y resultados autorizados | Agendas asignadas y asistencia; resultados además exigen relación asistencial vigente |
@@ -82,3 +82,7 @@ Finanzas de Tresuryx (suscripciones SaaS) y finanzas de la clínica (prestacione
 5. Administración comercial SaaS, automatización de onboarding y operación de redes grandes.
 
 Cada etapa requiere migraciones que preserven datos, permisos, escenarios de concurrencia, pruebas funcionales y documentación de qué quedó implementado. Publicar código en GitHub no publica automáticamente servicios ni activa proveedores externos.
+
+## Revisión S00/S01
+
+La gestión de personal incorpora contactos cifrados, invitaciones de 48h verificadas, un perfil principal, asignaciones por sede/agenda, baja/reactivación, versiones, protección concurrente del último administrador y MFA aplicado en servidor. La fuente de estado y requisitos es [planificación](planning/README.md); [evidencia](planning/VALIDATION_S00_S01.md) distingue pruebas aisladas e integración pendiente. S01 no está cerrada por faltar la validación externa autorizada. No hay roles privilegiados demo ni registro público de administradores. El resto del mapa continúa en S02–S15, sin implementarlo en esta entrega.

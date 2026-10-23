@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { api, platformApi, type Appointment, type SessionProfile } from './api'
 import { useDialog } from './Dialog'
+import { Team } from './Team'
 
 type Organization = {
   branches: {
@@ -54,7 +55,9 @@ export function ClinicalWorkspace({
   const [hasMore, setHasMore] = useState(false)
   const [loading, setLoading] = useState(true)
   const [busy, setBusy] = useState(false)
-  const [tab, setTab] = useState<'calendar' | 'organization'>('calendar')
+  const [tab, setTab] = useState<'calendar' | 'organization' | 'team'>(
+    'calendar',
+  )
   const [revision, setRevision] = useState(0)
   const can = (capability: string) => profile.capabilities.includes(capability)
   useEffect(() => {
@@ -199,6 +202,14 @@ export function ClinicalWorkspace({
           >
             Agenda y actividad
           </button>
+          {can('team.manage') && (
+            <button
+              aria-pressed={tab === 'team'}
+              onClick={() => setTab('team')}
+            >
+              Equipo
+            </button>
+          )}
           {can('organization.read') && (
             <button
               aria-pressed={tab === 'organization'}
@@ -209,7 +220,9 @@ export function ClinicalWorkspace({
           )}
         </div>
       </div>
-      {tab === 'organization' ? (
+      {tab === 'team' ? (
+        <Team token={token} />
+      ) : tab === 'organization' ? (
         <div className="card">
           <h3 className="text-lg font-semibold">
             Red y sucursales autorizadas

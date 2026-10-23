@@ -113,3 +113,7 @@ El instalador conserva `.env` y las reservas. Después inicia de nuevo API y fro
 ## Acceso de los distintos perfiles
 
 La reserva de invitado funciona sin proveedor Auth. Los portales privados requieren Supabase Auth configurado y usuarios con permisos asignados en servidor. No hay un selector público que convierta a un paciente en administrador ni contraseñas demo compartidas. El panel SaaS requiere una identidad aprovisionada en `platform.operators`, diferente de `healthsync.memberships` para el personal de una clínica. La administración completa de invitaciones, concesiones y configuración desde formularios sigue pendiente; revisa el estado en `docs/PRODUCT_BLUEPRINT.md`.
+
+## Entrega S00/S01: planificación y equipo
+
+Lee [planificación y Gantt](docs/planning/README.md), [evidencia](docs/planning/VALIDATION_S00_S01.md), [Equipo/MFA e invitaciones](docs/team-access.md), [demo ficticia](docs/demos/README.md) y [actualización segura de Windows](docs/windows-update-s01.md). La gestión está preparada en una rama de revisión; Auth y correo reales requieren configuración y validación autorizadas. Instalar no envía invitaciones ni concede roles demo.

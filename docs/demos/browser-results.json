@@ -1,0 +1,24 @@
+{
+  "results": [
+    {
+      "width": 1280,
+      "keyboard": "pasa",
+      "focus": "pasa",
+      "cancel": "pasa",
+      "modal": "pasa",
+      "overflow": "pasa",
+      "systemDialogs": 0,
+      "api": "simulada; llamadas externas bloqueadas"
+    },
+    {
+      "width": 360,
+      "keyboard": "pasa",
+      "focus": "pasa",
+      "cancel": "pasa",
+      "modal": "pasa",
+      "overflow": "pasa",
+      "systemDialogs": 0,
+      "api": "simulada; llamadas externas bloqueadas"
+    }
+  ]
+}

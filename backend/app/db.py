@@ -101,6 +101,10 @@ async def staff_role(conn, principal: Principal | None) -> str | None:
         "SELECT role FROM healthsync.memberships WHERE auth_user_id=%s AND active",
         (principal.subject,),
     )
+    if row:
+        from .auth import verify_staff_session
+
+        await verify_staff_session(principal)
     return row["role"] if row else None
 
 

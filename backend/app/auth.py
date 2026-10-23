@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from functools import lru_cache
 from uuid import UUID
 
@@ -14,7 +14,8 @@ from .config import settings
 @dataclass(frozen=True)
 class Principal:
     subject: UUID
-    token: str
+    token: str = field(repr=False)
+    aal: str = "aal1"
 
 
 @lru_cache
@@ -38,7 +39,7 @@ def decode_token(token: str) -> Principal:
         options={"require": ["exp", "iat", "sub", "iss", "aud"]},
     )
     # No tenant or staff authorization is accepted from caller-controlled metadata.
-    return Principal(subject=UUID(claims["sub"]), token=token)
+    return Principal(subject=UUID(claims["sub"]), token=token, aal=claims.get("aal", "aal1"))
 
 
 async def optional_principal(authorization: str | None = Header(default=None)) -> Principal | None:
@@ -57,17 +58,39 @@ async def optional_principal(authorization: str | None = Header(default=None)) -
 
 async def verified_email(principal: Principal) -> str:
     # Confirmation is checked server-side, never from editable user_metadata.
-    async with httpx.AsyncClient(timeout=10) as client:
-        response = await client.get(
-            f"{settings().supabase_url}/auth/v1/user",
-            headers={
-                "apikey": settings().supabase_publishable_key,
-                "Authorization": f"Bearer {principal.token}",
-            },
-        )
+    if not settings().auth_enabled:
+        raise HTTPException(503, "Autenticación aún no configurada")
+    try:
+        async with httpx.AsyncClient(timeout=10) as client:
+            response = await client.get(
+                f"{settings().supabase_url}/auth/v1/user",
+                headers={
+                    "apikey": settings().supabase_publishable_key,
+                    "Authorization": f"Bearer {principal.token}",
+                },
+            )
+    except httpx.HTTPError:
+        raise HTTPException(
+            503, "Proveedor de identidad no disponible; vuelve a intentarlo"
+        ) from None
+    if response.status_code >= 500:
+        raise HTTPException(503, "Proveedor de identidad no disponible")
     if response.status_code != 200:
         raise HTTPException(401, "No se pudo verificar la identidad")
-    user = response.json()
+    try:
+        user = response.json()
+    except ValueError:
+        raise HTTPException(503, "Respuesta de identidad inválida") from None
+    if not isinstance(user, dict) or not isinstance(user.get("email"), str):
+        raise HTTPException(503, "Respuesta de identidad inválida")
     if user.get("id") != str(principal.subject) or not user.get("email_confirmed_at"):
         raise HTTPException(403, "Verifica tu correo antes de vincular reservas")
     return user["email"]
+
+
+async def verify_staff_session(principal: Principal):
+    # AAL comes only from the verified asymmetric JWT, never user_metadata.
+    # Required in every environment; a clinic cannot opt out for a hosted pilot.
+    if principal.aal != "aal2":
+        raise HTTPException(403, "El equipo requiere segundo factor (MFA). Verifica tu sesión.")
+    return await verified_email(principal)  # Fail closed on missing Auth / provider failure.

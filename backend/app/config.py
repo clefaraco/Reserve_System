@@ -20,6 +20,11 @@ class Settings(BaseSettings):
     vault_bucket: str = ""
     vault_region: str = "us-east-1"
     vault_kms_key_id: str = ""
+    staff_email_send_enabled: bool = False
+    resend_api_key: str = Field(default="", repr=False)
+    resend_webhook_secret: str = Field(default="", repr=False)
+    staff_email_from: str = ""
+    staff_accept_url: str = ""
     notification_webhook_url: str = ""
     notification_webhook_token: str = Field(default="", repr=False)
 
@@ -30,12 +35,29 @@ class Settings(BaseSettings):
             raise ValueError("Expected a base64-encoded, random 32-byte key")
         return value
 
-    @field_validator("supabase_url", "notification_webhook_url")
+    @field_validator("supabase_url", "notification_webhook_url", "staff_accept_url")
     @classmethod
     def https_only(cls, value: str) -> str:
         if value and not value.startswith("https://"):
             raise ValueError("External services require HTTPS")
         return value.rstrip("/")
+
+    @field_validator("staff_accept_url")
+    @classmethod
+    def accept_url_is_fixed(cls, value: str) -> str:
+        from urllib.parse import urlsplit
+
+        if value:
+            parts = urlsplit(value)
+            if (
+                not parts.hostname
+                or parts.username
+                or parts.password
+                or parts.query
+                or parts.fragment
+            ):
+                raise ValueError("Invitation redirect must be a fixed HTTPS URL")
+        return value
 
     @property
     def auth_enabled(self) -> bool:

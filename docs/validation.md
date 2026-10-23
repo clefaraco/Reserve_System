@@ -1,3 +1,5 @@
+> Registro histórico de la entrega anterior. Para S00/S01 consultar [validación vigente](planning/VALIDATION_S00_S01.md).
+
 # Validación · Medical Appointment System · Tresuryx SpA
 
 Entorno de desarrollo verificado el 23 de octubre de 2026 con Python 3.12, Node 24 y PostgreSQL 17 en Docker.

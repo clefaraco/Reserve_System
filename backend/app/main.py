@@ -35,6 +35,12 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="Medical Appointment System · Tresuryx SpA", version="0.2.0", lifespan=lifespan)
 app.include_router(workspace_router)
+from .team import router as team_router
+
+app.include_router(team_router)
+from .staff_delivery import router as staff_delivery_router
+
+app.include_router(staff_delivery_router)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings().cors_origins,
@@ -80,9 +86,12 @@ async def overlap(request, error):
 
 @app.exception_handler(LockNotAvailable)
 async def lock_timeout(request, error):
-    return JSONResponse(
-        status_code=409, content={"detail": "Agenda ocupada; reintenta con la misma clave"}
+    detail = (
+        "El equipo está siendo actualizado; recarga antes de reintentar"
+        if "/team" in request.url.path
+        else "Agenda ocupada; reintenta con la misma clave"
     )
+    return JSONResponse(status_code=409, content={"detail": detail})
 
 
 @app.exception_handler(UniqueViolation)
@@ -251,7 +260,16 @@ async def change_appointment(
 ):
     require_login(principal)
     async with transaction(tenant_id, request, principal) as (conn, tenant):
-        role = await staff_role(conn, principal)
+        own = await one(
+            conn,
+            """SELECT 1 FROM healthsync.appointments a
+            JOIN healthsync.patients p ON (p.tenant_id,p.id)=(a.tenant_id,a.patient_id)
+            WHERE a.id=%s AND p.auth_user_id=%s AND p.deleted_at IS NULL""",
+            (appointment_id, principal.subject),
+        )
+        # A staff member acting as patient retains the existing patient flow.
+        # Clinical privileges still require live membership + verified MFA.
+        role = None if own else await staff_role(conn, principal)
         appt = await one(
             conn,
             """
@@ -578,7 +596,14 @@ async def anonymize(
 
 async def authorized_result(conn, result_id, principal):
     require_login(principal)
-    role = await staff_role(conn, principal)
+    own = await one(
+        conn,
+        """SELECT 1 FROM healthsync.exam_results e
+        JOIN healthsync.patients p ON (p.tenant_id,p.id)=(e.tenant_id,e.patient_id)
+        WHERE e.id=%s AND p.auth_user_id=%s AND p.deleted_at IS NULL""",
+        (result_id, principal.subject),
+    )
+    role = None if own else await staff_role(conn, principal)
     # A clinician additionally needs a current, explicitly granted care relationship.
     row = await one(
         conn,

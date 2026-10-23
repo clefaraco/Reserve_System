@@ -146,3 +146,13 @@ Estados de integración visibles: no configurada, borrador, requiere contrato/cr
 - Solo participantes autorizados pueden entrar a una sesión remota; un enlace vencido/filtrado no concede acceso.
 - Ausencias y fallos técnicos siguen políticas y dejan evidencia; grabación desactivada por defecto.
 - Se prueban recuperación de colas, conciliación, restauración, sandbox y al menos un flujo real autorizado por proveedor antes de anunciar la integración como activa.
+
+## H. Decisión del dueño · 23 de octubre de 2026
+
+**Transbank y Mercado Pago** son las primeras opciones previstas. Se conservan además Flow, Khipu, Compraquí de BancoEstado, conexiones directas con bancos y proveedores futuros. Son preferencias para evaluar, sin afirmar contratación, sandbox disponible ni capacidades verificadas. Las tareas `S13.COMMON`, `S13.TRANSBANK`, `S13.MERCADOPAGO`, `S13.FLOW`, `S13.KHIPU`, `S13.COMPRAQUI`, `S13.BANKS` y `S13.FUTURE` viven en [backlog](planning/backlog.json).
+
+Antes de elegir el primer conector: evaluar documentación oficial fechada, contratación, sandbox, costos, monedas/países, capacidades, seguridad, devoluciones, conciliación y soporte. Configuración por tenant/comercio y entorno; posible coexistencia de pasarelas solo según capacidades verificadas y elegibilidad de servicio/moneda/contrato. Cada clínica cobra en su comercio y Tresuryx factura SaaS aparte.
+
+Mantener separados pasarela online (`S13.*`), POS presencial (`S13.POS`), transferencia registrada (`S13.TRANSFER`) y conexión bancaria automatizada (`S13.BANKS`). Registrar una transferencia manual no equivale a conexión con un banco. Coberturas/bonos/i-med (`S13.COVERAGE`) y suscripciones Tresuryx (`S13.SAAS`) son dominios distintos.
+
+Importes y moneda se calculan en servidor; webhooks auténticos, idempotencia y aislamiento por comercio obligatorios. No almacenar PAN completo ni CVV. GiST debe incluir retenciones de agenda antes de introducir pago previo. Comisión/recargo y su tratamiento por clínica siguen pendientes; no agregar recargo automático al paciente. Ante un intento desconocido, resolver su estado antes de repetir o cambiar de pasarela. Esta entrega S00/S01 solo registra decisiones: **ninguna integración ni cobro activados y ningún framework de pagos construido**.

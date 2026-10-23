@@ -33,6 +33,7 @@ def test_database():
             (ROOT / "database/003_organization_and_workspaces.sql").read_text(encoding="utf-8")
         )
         conn.execute((ROOT / "database/004_platform_access_audit.sql").read_text(encoding="utf-8"))
+        conn.execute((ROOT / "database/005_team_access.sql").read_text(encoding="utf-8"))
     previous = os.environ.get("DATABASE_URL")
     os.environ["DATABASE_URL"] = psycopg.conninfo.make_conninfo(
         host="127.0.0.1",
@@ -120,13 +121,20 @@ async def client(test_database):
 
 
 @pytest.fixture
-def login():
+def login(monkeypatch):
     from app.auth import Principal, optional_principal
     from app.main import app
 
+    async def verified(principal):
+        return f"{principal.subject}@example.test"
+
+    monkeypatch.setattr("app.auth.verified_email", verified)
+
     def set_user(subject=None):
         subject = subject or uuid4()
-        app.dependency_overrides[optional_principal] = lambda: Principal(subject, "test-only-token")
+        app.dependency_overrides[optional_principal] = lambda: Principal(
+            subject, "test-only-token", "aal2"
+        )
         return subject
 
     return set_user

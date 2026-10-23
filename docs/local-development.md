@@ -90,3 +90,5 @@ git push -u origin feature/mi-cambio
 Revisa cada commit y abre un Pull Request. Antes de una sesión nueva actualiza tu checkout con los cambios remotos; evita trabajar sobre dos copias divergentes sin sincronizarlas.
 
 `.env`, claves, `node_modules`, entornos Python, datos de PostgreSQL y resultados médicos no deben entrar a GitHub. Están excluidos los archivos locales habituales, pero `gitignore` no detecta por sí solo un secreto pegado en código: revisa el contenido antes de subirlo. Usa archivos `.env.example` exclusivamente con nombres y ejemplos sin credenciales. Si se filtra un secreto, hay que revocarlo; borrarlo del siguiente commit no lo elimina del historial.
+
+Para revisar la rama S00/S01 en una instalación Windows existente, seguir [actualización conservando claves y datos](windows-update-s01.md). La pantalla Equipo exige Auth/MFA y un administrador aprovisionado explícitamente; no incluye acceso demo. Ver [demo ficticia aislada](demos/README.md).

@@ -11,6 +11,7 @@ import {
 import { DialogProvider, useDialog, validateForm } from './Dialog'
 import { COMPANY_NAME, PRODUCT_NAME } from './brand'
 import { ClinicalWorkspace, PlatformWorkspace } from './Workspace'
+import { TeamAccess } from './Team'
 
 function today(timezone: string) {
   const parts = new Intl.DateTimeFormat('en-CA', {
@@ -90,7 +91,19 @@ function BookingScreen() {
   }>()
   const [view, setView] = useState<
     'booking' | 'patient' | 'workspace' | 'platform'
-  >('booking')
+  >(() =>
+    window.location.hash.startsWith('#team-invite=') ? 'workspace' : 'booking',
+  )
+  const [invitation, setInvitation] = useState(() =>
+    window.location.hash.startsWith('#team-invite=')
+      ? window.location.hash.slice(13)
+      : '',
+  )
+  const [sessionRevision, setSessionRevision] = useState(0)
+  useEffect(() => {
+    if (window.location.hash.startsWith('#team-invite='))
+      window.history.replaceState(null, '', window.location.pathname)
+  }, [])
   const portal = view === 'patient'
   const [profile, setProfile] = useState<SessionProfile>(ANONYMOUS)
   const [appointmentFilter, setAppointmentFilter] = useState<
@@ -124,14 +137,23 @@ function BookingScreen() {
       return
     }
     setAppointments([])
+    setProfile(ANONYMOUS)
+    let active = true
     api<SessionProfile>('/session', {}, token)
-      .then(setProfile)
+      .then((data) => {
+        if (active) setProfile(data)
+      })
       .catch((e) => setError(e.message))
     api('/account/claim', { method: 'POST' }, token)
       .then(() => api<Appointment[]>('/appointments', {}, token))
-      .then(setAppointments)
+      .then((data) => {
+        if (active) setAppointments(data)
+      })
       .catch((e) => setError(e.message))
-  }, [token])
+    return () => {
+      active = false
+    }
+  }, [token, sessionRevision])
   useEffect(() => {
     if (!selected || !day) {
       setSlots([])
@@ -470,6 +492,16 @@ function BookingScreen() {
           <p role="status" className="mt-8">
             Cargando agenda…
           </p>
+        )}
+        {view === 'workspace' && (
+          <TeamAccess
+            token={token}
+            invitation={invitation}
+            onAccepted={() => {
+              setInvitation('')
+              setSessionRevision((x) => x + 1)
+            }}
+          />
         )}
         {view === 'workspace' && token ? (
           <ClinicalWorkspace token={token} profile={profile} />
