@@ -1,4 +1,6 @@
-# Arquitectura y decisiones
+# Arquitectura y decisiones · Medical Appointment System
+
+La ampliación vigente de roles, unidades organizativas, espacios de trabajo y módulos se detalla en [Producto](PRODUCT_BLUEPRINT.md). Pagos y telemedicina tienen su [especificación](PAYMENTS_COVERAGE_TELEMEDICINE.md). El esquema histórico se conserva y las migraciones 003/004 agregan tablas sin reiniciar instalaciones.
 
 ## Flujo general
 

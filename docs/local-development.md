@@ -1,6 +1,6 @@
 # Trabajar en tu computador y guardar el código en GitHub
 
-El proyecto actual tiene React/Tailwind, FastAPI y PostgreSQL local. No necesitas contratar hosting ni conectar cuentas externas para probar la reserva como invitado con datos ficticios.
+Medical Appointment System, desarrollado por Tresuryx SpA, tiene React/Tailwind, FastAPI y PostgreSQL local. No necesitas contratar hosting ni conectar cuentas externas para probar la reserva como invitado con datos ficticios.
 
 ## Requisitos
 
@@ -40,7 +40,7 @@ npm run dev
 
 En el navegador **de tu computador**, abre `http://localhost:5173`. No abras `frontend/index.html` como archivo: la aplicación requiere Vite y la API. Los servidores solo escuchan en tu equipo, no se publican en Internet.
 
-Puedes elegir consulta, profesional y horario y reservar con datos ficticios. El checkbox de cuenta se habilita únicamente cuando se configure Supabase Auth en frontend y backend. Dashboard de reportería, carga real de PDFs y entrega de mensajes siguen pendientes, según los documentos de alcance.
+Puedes elegir consulta, profesional y horario y reservar con datos ficticios. El checkbox de cuenta se habilita únicamente cuando se configure Supabase Auth en frontend y backend. El espacio de equipo tiene agenda, recepción y resumen operativo cuando se asignan perfiles y alcances. Reporterías avanzadas, edición completa de configuración, pagos, coberturas, telemedicina, carga de PDFs y entrega real de mensajes siguen pendientes, según `PRODUCT_BLUEPRINT.md`.
 
 Docker ya queda iniciado por el instalador. Tras reiniciar tu computador, arranca Docker Desktop y ejecuta desde la raíz:
 

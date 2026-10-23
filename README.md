@@ -1,12 +1,14 @@
-# HealthSync
+# Medical Appointment System
 
-Base ejecutable de un SaaS de reservas médicas: React + Tailwind, FastAPI y PostgreSQL 17. Incluye aislamiento por clínica, reserva transaccional, portal del paciente, consentimientos versionados, cifrado de contacto, auditoría y base del Vault de resultados.
+**Desarrollado por Tresuryx SpA.** Base ejecutable de un SaaS de reservas médicas: React + Tailwind, FastAPI y PostgreSQL 17. Incluye aislamiento por clínica, reserva transaccional, portal del paciente, consentimientos versionados, cifrado de contacto, auditoría y base del Vault de resultados.
 
 **Es una base de desarrollo, no una certificación de cumplimiento ni un despliegue de producción.** Los documentos de demostración no son avisos legales válidos. La matriz de controles, límites y obligaciones de despliegue está en [Privacidad y seguridad](docs/privacy-security.md).
 
 La propuesta de proveedores, ubicación de datos, pasos de despliegue y reportería está en [Plan de producción y reportería](docs/production-reporting-plan.md). Ese plan distingue lo implementado de las integraciones y módulos pendientes.
 
 **Para empezar desde tu computador:** sigue [Desarrollo local y GitHub](docs/local-development.md). La dirección de alojamiento simplificada se describe en [Cloudflare + Supabase](docs/cloudflare-supabase-target.md); esa migración todavía no está implementada y el código actual se ejecuta con FastAPI.
+
+El alcance funcional vigente se encuentra en [Producto y perfiles](docs/PRODUCT_BLUEPRINT.md), [Pagos, seguros y telemedicina](docs/PAYMENTS_COVERAGE_TELEMEDICINE.md) y [Contexto para otra IA](docs/AI_CONTEXT.md). Identificadores técnicos `healthsync` permanecen para conservar compatibilidad.
 
 ## 1. Entregables
 
@@ -17,6 +19,8 @@ La propuesta de proveedores, ubicación de datos, pasos de despliegue y reporter
 | Controlador HTTP y portal/privacidad/Vault | [backend/app/main.py](backend/app/main.py) |
 | Motor de creación de reservas y eventos | [backend/app/booking.py](backend/app/booking.py) |
 | Flujo React Guest → Registered y portal | [frontend/src/BookingFlow.tsx](frontend/src/BookingFlow.tsx) |
+| Agenda del equipo, organización y directorio SaaS | [backend/app/workspaces.py](backend/app/workspaces.py) y [Workspace.tsx](frontend/src/Workspace.tsx) |
+| Modales accesibles de la aplicación | [Dialog.tsx](frontend/src/Dialog.tsx) |
 | Worker de recordatorios, correo, WhatsApp y Magic Link | [backend/app/worker.py](backend/app/worker.py) |
 
 ## 2. Instalar
@@ -29,7 +33,7 @@ Desde la raíz:
 python scripts/install.py
 ```
 
-Instala dependencias con lockfiles, crea `.env` ignorado con claves aleatorias privadas, inicia PostgreSQL y aplica el esquema y catálogo ficticio a una base **nueva**. Las ejecuciones posteriores conservan la base y las claves. No regenera contraseñas ni sobrescribe `.env`. El bootstrap local no es un gestor de migraciones para producción; para cambios posteriores agrega migraciones numeradas y revísalas.
+Instala dependencias con lockfiles, crea `.env` ignorado con claves aleatorias privadas, inicia PostgreSQL y aplica el esquema y catálogo ficticio a una base **nueva**. Las ejecuciones posteriores conservan la base y las claves. No regenera contraseñas ni sobrescribe `.env`. El bootstrap aplica migraciones incrementales 003 en adelante y registra su checksum sin borrar datos. Si una migración ya aplicada cambia, falla en lugar de repetirla. Para cambios posteriores agrega un archivo numerado nuevo y revísalo. En producción usa un proceso de migraciones administrativo revisado, no el bootstrap Docker local.
 
 ## 3. Arrancar
 
@@ -91,6 +95,21 @@ Sin estos proveedores, la reserva como invitado funciona y los eventos quedan pe
 
 ## 6. Supabase y producción
 
-Aplica `001_schema.sql` con un propietario de migraciones y asigna una contraseña segura a `healthsync_app` por un canal administrativo. Conecta FastAPI con ese rol, nunca con `postgres`, el propietario o `service_role`. No expongas el esquema `healthsync` mediante PostgREST ni concedas acceso a `anon`/`authenticated`: la autorización de paciente y personal se aplica en FastAPI y RLS limita cada transacción al tenant.
+Aplica `001_schema.sql` y después las migraciones `003_*.sql`, `004_*.sql` y posteriores en orden, con un propietario de migraciones y asigna una contraseña segura a `healthsync_app` por un canal administrativo. Conecta FastAPI con ese rol, nunca con `postgres`, el propietario o `service_role`. No expongas el esquema `healthsync` mediante PostgREST ni concedas acceso a `anon`/`authenticated`: la autorización de paciente y personal se aplica en FastAPI y RLS limita cada transacción al tenant.
 
 El SQL es compatible con PostgreSQL de Supabase (`btree_gist`); la extensión y la creación de roles requieren los permisos administrativos del proyecto. Para conexiones administradas configura TLS verificado (`sslmode=verify-full` y CA correspondiente). El helper Docker se limita a desarrollo local. Los detalles del Vault de fase 2 y la configuración de almacenamiento están en [Arquitectura](docs/architecture.md).
+
+## Actualizar una instalación existente en Windows
+
+Detén las dos terminales de la aplicación con `Ctrl+C` y mantén Docker Desktop funcionando. Desde la carpeta principal:
+
+```powershell
+git pull --ff-only
+python scripts/install.py
+```
+
+El instalador conserva `.env` y las reservas. Después inicia de nuevo API y frontend como se describe arriba. No elimines el volumen de Docker para aplicar una actualización.
+
+## Acceso de los distintos perfiles
+
+La reserva de invitado funciona sin proveedor Auth. Los portales privados requieren Supabase Auth configurado y usuarios con permisos asignados en servidor. No hay un selector público que convierta a un paciente en administrador ni contraseñas demo compartidas. El panel SaaS requiere una identidad aprovisionada en `platform.operators`, diferente de `healthsync.memberships` para el personal de una clínica. La administración completa de invitaciones, concesiones y configuración desde formularios sigue pendiente; revisa el estado en `docs/PRODUCT_BLUEPRINT.md`.

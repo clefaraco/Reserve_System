@@ -8,6 +8,7 @@ from pathlib import Path
 
 import psycopg
 from dotenv import dotenv_values
+from migrations import apply_incremental
 from psycopg import sql
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -39,14 +40,15 @@ with psycopg.connect(
 ) as conn:
     exists = conn.execute("SELECT to_regclass('healthsync.tenants')").fetchone()[0]
     if not exists:
-        conn.execute((ROOT / "database/001_schema.sql").read_text())
+        conn.execute((ROOT / "database/001_schema.sql").read_text(encoding="utf-8"))
         conn.execute(
             sql.SQL("ALTER ROLE healthsync_app PASSWORD {}").format(
                 sql.Literal(values["APP_DB_PASSWORD"])
             )
         )
-        conn.execute((ROOT / "database/002_demo.sql").read_text())
+        conn.execute((ROOT / "database/002_demo.sql").read_text(encoding="utf-8"))
         print("Applied schema and synthetic demo catalog.")
     else:
-        print("Existing database preserved; no migrations or password changes applied.")
+        print("Existing database preserved; checking incremental migrations.")
+    apply_incremental(conn, ROOT)
 print("Local database ready. Start the API and web app using README.md.")

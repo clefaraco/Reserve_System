@@ -1,12 +1,12 @@
-# Validación realizada
+# Validación · Medical Appointment System · Tresuryx SpA
 
 Entorno de desarrollo verificado el 23 de octubre de 2026 con Python 3.12, Node 24 y PostgreSQL 17 en Docker.
 
 | Comprobación | Resultado |
 | --- | --- |
 | Esquema SQL aplicado en bases PostgreSQL nuevas | Correcto; RLS y triggers activos, rol runtime sin propiedad ni BYPASSRLS |
-| Backend: `python -m pytest -q` | 23 pruebas aprobadas |
-| Frontend: `npm test` | 2 pruebas aprobadas |
+| Backend: `python -m pytest -q` | 31 pruebas aprobadas |
+| Frontend: `npm test` | 6 pruebas aprobadas |
 | Frontend: `npm run build` | TypeScript y compilación Vite aprobados |
 | Python: `ruff check app tests ../scripts` | Aprobado |
 | Dependencias frontend: `npm audit` | 0 vulnerabilidades reportadas en la consulta, incluyendo desarrollo |
@@ -16,6 +16,10 @@ Entorno de desarrollo verificado el 23 de octubre de 2026 con Python 3.12, Node 
 
 Las pruebas incluyen dos reservas simultáneas, dos INSERT concurrentes sin pasar por el controlador (uno excluido por GiST), buffer y adyacencia, RLS sin contexto y entre tenants, confirmación seguida de modificación, límites de tiempo, aislamiento por propietario, consentimiento vigente y WhatsApp, AES-GCM con manipulación/AAD incorrecto, JWT forjado/issuer/audience/expiración inválidos, reclamación de cuenta con correo verificado, entrega OTP simulada, exportación, anonimización sujeta a retención, auditoría append-only y persistencia de lecturas tras rollback. En Vault se comprueban aperturas repetidas, enlace vencido, otro usuario y relación asistencial concedida/revocada.
 
-Las pruebas de UI verifican aceptación explícita, transición a cuenta con los datos ya ingresados y conservación de la clave de idempotencia tras un fallo de red. Se ejecutan en jsdom; no equivalen a una revisión visual en todos los navegadores.
+Las pruebas de UI verifican aceptación explícita, inscripción con los datos ya ingresados, clave de idempotencia tras fallo de red, validación en modal, historial del paciente, cancelación explícita y cola de mensajes modales. Además se revisaron escritorio y móvil en Chromium real, sin desbordamiento horizontal, con foco dentro del modal, cierre por Escape y sin diálogos de sistema. No equivale a una revisión de todos los navegadores.
 
 El proveedor Auth, la entrega real email/WhatsApp, el bucket/KMS y el escáner PDF **no se validaron contra servicios externos**. Las pruebas usan transportes simulados para los proveedores y un PDF ficticio para la lectura. No se ha publicado el entorno, desplegado a producción ni verificado restauración en una tarea nueva. La consulta de vulnerabilidades es puntual y no sustituye un pentest ni una revisión de toda la cadena de suministro.
+
+La ampliación incluye pruebas reales de recepción por sucursal, agenda médica asignada, finanzas sin PII, separación del administrador SaaS respecto al tenant, registro de asistencia, cambios de versión, historial append-only, jerarquía sin ciclos y lectura auditada de resúmenes. Se probó migrar una base con una reserva existente, repetir la migración sin duplicados y rechazar un archivo aplicado cuyo checksum cambió. No se eliminan datos para actualizar.
+
+Pagos online, seguros/Isapres/Fonasa/i-med, convenios y telemedicina están especificados en `PAYMENTS_COVERAGE_TELEMEDICINE.md`; no son integraciones activas ni pruebas de funcionamiento real de esos proveedores.

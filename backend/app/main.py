@@ -20,6 +20,7 @@ from .config import settings
 from .crypto import decrypt, email_index
 from .db import audit, many, one, staff_role, transaction
 from .models import Booking, ChangeAppointment, PrivacyRequest
+from .workspaces import router as workspace_router
 
 
 @asynccontextmanager
@@ -32,7 +33,8 @@ async def lifespan(app: FastAPI):
             await db.pool.close()
 
 
-app = FastAPI(title="HealthSync", version="0.1.0", lifespan=lifespan)
+app = FastAPI(title="Medical Appointment System · Tresuryx SpA", version="0.2.0", lifespan=lifespan)
+app.include_router(workspace_router)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings().cors_origins,
@@ -255,10 +257,19 @@ async def change_appointment(
             """
             SELECT a.* FROM healthsync.appointments a
             JOIN healthsync.patients p ON (p.tenant_id,p.id)=(a.tenant_id,a.patient_id)
+            JOIN healthsync.resources r ON (r.tenant_id,r.id)=(a.tenant_id,a.resource_id)
             WHERE a.id=%s AND p.deleted_at IS NULL
-              AND (p.auth_user_id=%s OR %s) FOR UPDATE OF a
+              AND (p.auth_user_id=%s OR %s OR (%s AND EXISTS (
+                SELECT 1 FROM healthsync.membership_branches mb WHERE mb.tenant_id=r.tenant_id
+                  AND mb.branch_id=r.branch_id AND mb.auth_user_id=%s))) FOR UPDATE OF a
         """,
-            (appointment_id, principal.subject, role in ("admin", "scheduler")),
+            (
+                appointment_id,
+                principal.subject,
+                role == "admin",
+                role in ("scheduler", "reception"),
+                principal.subject,
+            ),
         )
         if not appt:
             raise HTTPException(404, "Reserva no encontrada")
@@ -403,6 +414,18 @@ async def export_data(
             """,
                 (pid,),
             )
+            attendance = await many(
+                conn,
+                """SELECT id,appointment_id,checked_in_at,completed_at,outcome
+                FROM healthsync.attendance_records WHERE patient_id=%s""",
+                (pid,),
+            )
+            history = await many(
+                conn,
+                """SELECT id,appointment_id,occurred_at,previous_status,status,
+                previous_starts_at,starts_at,version FROM healthsync.appointment_events WHERE patient_id=%s""",
+                (pid,),
+            )
             evidence = await many(
                 conn,
                 """
@@ -423,6 +446,8 @@ async def export_data(
                 ("consents", consents),
                 ("exam_results", results),
                 ("privacy_requests", requests),
+                ("attendance_records", attendance),
+                ("appointment_events", history),
             ):
                 for row in rows:
                     await audit(conn, pid, "EXPORT", entity, row["id"])
@@ -435,6 +460,8 @@ async def export_data(
                     "consents": consents,
                     "exam_results": results,
                     "privacy_requests": requests,
+                    "attendance": attendance,
+                    "appointment_history": history,
                     "access_history": evidence,
                 }
             )

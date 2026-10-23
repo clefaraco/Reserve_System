@@ -10,7 +10,7 @@ tenant = "10000000-0000-4000-8000-000000000001"
 with httpx.Client(base_url=base, timeout=15) as client:
     assert client.get("/health").json() == {"status": "ok"}
     catalog = client.get(f"/v1/{tenant}/catalog").json()
-    assert "Demo" in catalog["tenant"]
+    assert catalog["tenant"] in ("Clínica de demostración", "Clínica HealthSync · Demo")
     assert all(d["version"].startswith("demo") for d in catalog["documents"])
     service = catalog["services"][0]
     day = (datetime.now(UTC) + timedelta(days=3)).date().isoformat()
@@ -41,7 +41,7 @@ with httpx.Client(base_url=base, timeout=15) as client:
     )
     assert conflict.status_code == 409
 with httpx.Client(base_url="http://127.0.0.1:5173", timeout=10) as client:
-    assert "HealthSync" in client.get("/").text
+    assert "Medical Appointment System" in client.get("/").text
     assert client.get("/health").json() == {"status": "ok"}
 print(
     "PASS: API readiness, catalog, availability, booking, idempotent retry, conflict, frontend and proxy."

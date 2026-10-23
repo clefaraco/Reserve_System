@@ -28,7 +28,11 @@ def test_database():
     with psycopg.connect(**owner, dbname="postgres", autocommit=True) as conn:
         conn.execute(sql.SQL("CREATE DATABASE {}").format(sql.Identifier(name)))
     with psycopg.connect(**owner, dbname=name) as conn:
-        conn.execute((ROOT / "database/001_schema.sql").read_text())
+        conn.execute((ROOT / "database/001_schema.sql").read_text(encoding="utf-8"))
+        conn.execute(
+            (ROOT / "database/003_organization_and_workspaces.sql").read_text(encoding="utf-8")
+        )
+        conn.execute((ROOT / "database/004_platform_access_audit.sql").read_text(encoding="utf-8"))
     previous = os.environ.get("DATABASE_URL")
     os.environ["DATABASE_URL"] = psycopg.conninfo.make_conninfo(
         host="127.0.0.1",
