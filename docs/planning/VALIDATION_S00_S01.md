@@ -47,3 +47,9 @@ Desde `backend`: `uv run --frozen pytest -q` y `uv run --frozen ruff check app t
 Las pruebas crean/eliminan únicamente bases de nombre aleatorio `healthsync_test_*` / `healthsync_migration_test_*`. No enviar/restaurar copias con comunicaciones externas habilitadas. La prueba HTTP usa exclusivamente la clínica demo reconocida y crea reservas ficticias. La migración y tests no autorizan una restauración destructiva ni borrar volúmenes.
 
 La línea base se conserva; se registran cierres técnicos observados. Estimación inicial 25–48 horas efectivas con una persona, sin medición de duración real ni capacidad calendario confirmada. No hay fecha comprometida de fin S01/go-live; espera por terceros sigue sin estimar. S02–S15 conservan su alcance, dependencias y criterios; pagos únicamente documentados. Hallazgos abiertos: entrega de mensajes de pacientes, leases/latencia, conservación de invitaciones/contactos, vinculación de empleados antiguos y CI/operación alojada.
+
+## Revisión publicada
+
+Código funcional validado: [397de0d9cfd90c724880b95502efb6218d591e5c](https://github.com/clefaraco/Reserve_System/commit/397de0d9cfd90c724880b95502efb6218d591e5c). La actualización posterior solo enlaza evidencia/publicación y regenera las vistas; no cambia código funcional. Las seis comprobaciones de planificación se reejecutaron tras regenerarlas.
+
+Rama remota subida correctamente con Git nativo. `gh pr create --draft` falló con `Post https://api.github.com/graphql: Forbidden`; no existe un PR creado por esta sesión. [Abrir el PR manualmente](https://github.com/clefaraco/Reserve_System/pull/new/feature/s00-s01-team-access), seleccionando **Create draft pull request** y usando [descripción preparada](PR_DESCRIPTION.md). Sin merge ni despliegue. Esto es un bloqueo de acceso a la API de GitHub, no un fallo de las pruebas del producto.

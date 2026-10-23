@@ -52,7 +52,8 @@
         "end": "2026-10-23"
       },
       "evidence": [
-        "docs/planning/VALIDATION_S00_S01.md; scripts/planning.py --check; pruebas ejecutadas al cierre"
+        "docs/planning/VALIDATION_S00_S01.md; scripts/planning.py --check; pruebas ejecutadas al cierre",
+        "Código validado: 397de0d9cfd90c724880b95502efb6218d591e5c"
       ],
       "history": [
         {
@@ -123,7 +124,8 @@
         "end": null
       },
       "evidence": [
-        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)"
+        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)",
+        "Código validado: 397de0d9cfd90c724880b95502efb6218d591e5c"
       ],
       "history": [
         {
@@ -33428,7 +33430,8 @@
         "end": "2026-10-23"
       },
       "evidence": [
-        "docs/planning/VALIDATION_S00_S01.md; scripts/planning.py --check; pruebas ejecutadas al cierre"
+        "docs/planning/VALIDATION_S00_S01.md; scripts/planning.py --check; pruebas ejecutadas al cierre",
+        "Código validado: 397de0d9cfd90c724880b95502efb6218d591e5c"
       ],
       "history": [
         {
@@ -33506,7 +33509,8 @@
         "end": "2026-10-23"
       },
       "evidence": [
-        "docs/planning/VALIDATION_S00_S01.md; scripts/planning.py --check; pruebas ejecutadas al cierre"
+        "docs/planning/VALIDATION_S00_S01.md; scripts/planning.py --check; pruebas ejecutadas al cierre",
+        "Código validado: 397de0d9cfd90c724880b95502efb6218d591e5c"
       ],
       "history": [
         {
@@ -33585,7 +33589,8 @@
         "end": "2026-10-23"
       },
       "evidence": [
-        "docs/planning/VALIDATION_S00_S01.md; scripts/planning.py --check; pruebas ejecutadas al cierre"
+        "docs/planning/VALIDATION_S00_S01.md; scripts/planning.py --check; pruebas ejecutadas al cierre",
+        "Código validado: 397de0d9cfd90c724880b95502efb6218d591e5c"
       ],
       "history": [
         {
@@ -33664,7 +33669,8 @@
         "end": null
       },
       "evidence": [
-        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)"
+        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)",
+        "Código validado: 397de0d9cfd90c724880b95502efb6218d591e5c"
       ],
       "history": [
         {
@@ -33743,7 +33749,8 @@
         "end": null
       },
       "evidence": [
-        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)"
+        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)",
+        "Código validado: 397de0d9cfd90c724880b95502efb6218d591e5c"
       ],
       "history": [
         {
@@ -33823,7 +33830,8 @@
         "end": null
       },
       "evidence": [
-        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)"
+        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)",
+        "Código validado: 397de0d9cfd90c724880b95502efb6218d591e5c"
       ],
       "history": [
         {
@@ -33905,7 +33913,8 @@
         "end": "2026-10-23"
       },
       "evidence": [
-        "docs/planning/VALIDATION_S00_S01.md; scripts/planning.py --check; pruebas ejecutadas al cierre"
+        "docs/planning/VALIDATION_S00_S01.md; scripts/planning.py --check; pruebas ejecutadas al cierre",
+        "Código validado: 397de0d9cfd90c724880b95502efb6218d591e5c"
       ],
       "history": [
         {
@@ -34051,7 +34060,8 @@
         "end": "2026-10-23"
       },
       "evidence": [
-        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)"
+        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)",
+        "Código validado: 397de0d9cfd90c724880b95502efb6218d591e5c"
       ],
       "history": [
         {
@@ -34130,7 +34140,8 @@
         "end": "2026-10-23"
       },
       "evidence": [
-        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)"
+        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)",
+        "Código validado: 397de0d9cfd90c724880b95502efb6218d591e5c"
       ],
       "history": [
         {
@@ -34209,7 +34220,8 @@
         "end": "2026-10-23"
       },
       "evidence": [
-        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)"
+        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)",
+        "Código validado: 397de0d9cfd90c724880b95502efb6218d591e5c"
       ],
       "history": [
         {
@@ -34288,7 +34300,8 @@
         "end": "2026-10-23"
       },
       "evidence": [
-        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)"
+        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)",
+        "Código validado: 397de0d9cfd90c724880b95502efb6218d591e5c"
       ],
       "history": [
         {
@@ -34367,7 +34380,8 @@
         "end": "2026-10-23"
       },
       "evidence": [
-        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)"
+        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)",
+        "Código validado: 397de0d9cfd90c724880b95502efb6218d591e5c"
       ],
       "history": [
         {
@@ -34446,7 +34460,8 @@
         "end": "2026-10-23"
       },
       "evidence": [
-        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)"
+        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)",
+        "Código validado: 397de0d9cfd90c724880b95502efb6218d591e5c"
       ],
       "history": [
         {
@@ -34525,7 +34540,8 @@
         "end": "2026-10-23"
       },
       "evidence": [
-        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)"
+        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)",
+        "Código validado: 397de0d9cfd90c724880b95502efb6218d591e5c"
       ],
       "history": [
         {
@@ -34604,7 +34620,8 @@
         "end": "2026-10-23"
       },
       "evidence": [
-        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)"
+        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)",
+        "Código validado: 397de0d9cfd90c724880b95502efb6218d591e5c"
       ],
       "history": [
         {
@@ -34683,7 +34700,8 @@
         "end": "2026-10-23"
       },
       "evidence": [
-        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)"
+        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)",
+        "Código validado: 397de0d9cfd90c724880b95502efb6218d591e5c"
       ],
       "history": [
         {
@@ -34762,7 +34780,8 @@
         "end": "2026-10-23"
       },
       "evidence": [
-        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)"
+        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)",
+        "Código validado: 397de0d9cfd90c724880b95502efb6218d591e5c"
       ],
       "history": [
         {
@@ -34841,7 +34860,8 @@
         "end": "2026-10-23"
       },
       "evidence": [
-        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)"
+        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)",
+        "Código validado: 397de0d9cfd90c724880b95502efb6218d591e5c"
       ],
       "history": [
         {
@@ -34920,7 +34940,8 @@
         "end": "2026-10-23"
       },
       "evidence": [
-        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)"
+        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)",
+        "Código validado: 397de0d9cfd90c724880b95502efb6218d591e5c"
       ],
       "history": [
         {
@@ -34999,7 +35020,8 @@
         "end": "2026-10-23"
       },
       "evidence": [
-        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)"
+        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)",
+        "Código validado: 397de0d9cfd90c724880b95502efb6218d591e5c"
       ],
       "history": [
         {
@@ -35078,7 +35100,8 @@
         "end": "2026-10-23"
       },
       "evidence": [
-        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)"
+        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)",
+        "Código validado: 397de0d9cfd90c724880b95502efb6218d591e5c"
       ],
       "history": [
         {
@@ -35157,7 +35180,8 @@
         "end": "2026-10-23"
       },
       "evidence": [
-        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)"
+        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)",
+        "Código validado: 397de0d9cfd90c724880b95502efb6218d591e5c"
       ],
       "history": [
         {
@@ -35236,7 +35260,8 @@
         "end": "2026-10-23"
       },
       "evidence": [
-        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)"
+        "docs/planning/VALIDATION_S00_S01.md (A–P; pruebas aisladas, no integración real)",
+        "Código validado: 397de0d9cfd90c724880b95502efb6218d591e5c"
       ],
       "history": [
         {
@@ -36967,12 +36992,12 @@
         "Rama remota con evidencia; PR en borrador sin merge ni despliegue. API de GitHub actualmente devuelve Forbidden."
       ],
       "dependencies": [],
-      "status": "en desarrollo",
+      "status": "bloqueado",
       "owner": "IA desarrolladora",
       "blockers": [
-        "API GitHub GraphQL: Forbidden para consultar/abrir PR"
+        "gh pr create --draft: API GraphQL de GitHub responde Forbidden; rama subida con Git nativo"
       ],
-      "next_action": "Subir rama con Git nativo y reintentar PR borrador; no merge ni despliegue",
+      "next_action": "Abrir PR manual en borrador desde enlace documentado; no merge/desplegar",
       "estimate": {
         "value": null,
         "unit": "horas de trabajo",
@@ -36992,11 +37017,19 @@
         "start": null,
         "end": null
       },
-      "evidence": [],
+      "evidence": [
+        "Rama remota feature/s00-s01-team-access subida correctamente",
+        "Código validado: 397de0d9cfd90c724880b95502efb6218d591e5c",
+        "docs/planning/PR_DESCRIPTION.md"
+      ],
       "history": [
         {
           "date": "2026-10-23",
           "event": "Hallazgo registrado durante S00/S01"
+        },
+        {
+          "date": "2026-10-23",
+          "event": "Push autorizado completado; creación de PR borrador rechazada por API GitHub (Forbidden), sin merge ni despliegue"
         }
       ],
       "covered_by": [
@@ -37059,7 +37092,8 @@
         "end": "2026-10-23"
       },
       "evidence": [
-        "docs/planning/VALIDATION_S00_S01.md; scripts/planning.py --check; pruebas ejecutadas al cierre"
+        "docs/planning/VALIDATION_S00_S01.md; scripts/planning.py --check; pruebas ejecutadas al cierre",
+        "Código validado: 397de0d9cfd90c724880b95502efb6218d591e5c"
       ],
       "history": [
         {
@@ -37130,7 +37164,8 @@
         "end": "2026-10-23"
       },
       "evidence": [
-        "docs/planning/VALIDATION_S00_S01.md; scripts/planning.py --check; pruebas ejecutadas al cierre"
+        "docs/planning/VALIDATION_S00_S01.md; scripts/planning.py --check; pruebas ejecutadas al cierre",
+        "Código validado: 397de0d9cfd90c724880b95502efb6218d591e5c"
       ],
       "history": [
         {
@@ -37202,7 +37237,8 @@
         "end": "2026-10-23"
       },
       "evidence": [
-        "docs/planning/VALIDATION_S00_S01.md; scripts/planning.py --check; pruebas ejecutadas al cierre"
+        "docs/planning/VALIDATION_S00_S01.md; scripts/planning.py --check; pruebas ejecutadas al cierre",
+        "Código validado: 397de0d9cfd90c724880b95502efb6218d591e5c"
       ],
       "history": [
         {
@@ -37249,11 +37285,18 @@
         "Restauración de foco detectada en prueba de navegador"
       ],
       "forecast_change": "Cierres técnicos con fecha observada; fin de S01/piloto continúa sin estimar por espera externa. Línea base conservada."
+    },
+    {
+      "date": "2026-10-23",
+      "event": "Publicación de rama completada; PR bloqueado por API GitHub",
+      "validated_code_commit": "397de0d9cfd90c724880b95502efb6218d591e5c",
+      "branch": "feature/s00-s01-team-access"
     }
   ],
   "scope_rules": [
     "No se elimina ni reutiliza un ID; diferido/cancelado requiere historial y vínculo canónico.",
     "Los textos importados conservan alcance íntegro; no son afirmaciones de implementación.",
     "Los criterios de futura entrega se refinan antes de estimar, conservando el original."
-  ]
+  ],
+  "verification_revision": "397de0d9cfd90c724880b95502efb6218d591e5c"
 }
