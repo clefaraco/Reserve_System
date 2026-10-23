@@ -1,0 +1,34 @@
+[project]
+name = "healthsync-api"
+version = "0.1.0"
+description = "Tenant-isolated medical scheduling foundation"
+requires-python = ">=3.12"
+dependencies = [
+  "fastapi>=0.115,<1",
+  "uvicorn[standard]>=0.34,<1",
+  "psycopg[binary,pool]>=3.2,<4",
+  "cryptography>=44,<47",
+  "pydantic-settings>=2.7,<3",
+  "email-validator>=2.2,<3",
+  "PyJWT[crypto]>=2.10,<3",
+  "httpx>=0.28,<1",
+  "boto3>=1.36,<2",
+]
+
+[dependency-groups]
+dev = ["pytest>=8,<10", "pytest-asyncio>=0.25,<2", "ruff>=0.11,<1"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+extend-safe-fixes = ["UP"]
+
+[tool.ruff.lint.flake8-bugbear]
+extend-immutable-calls = ["fastapi.Depends", "fastapi.Header"]

@@ -1,0 +1,17 @@
+services:
+  db:
+    image: postgres:17-alpine@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb
+    environment:
+      POSTGRES_DB: healthsync
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Generate a local password in .env}
+    ports:
+      - "127.0.0.1:54322:5432"
+    volumes:
+      - healthsync_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d healthsync"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+volumes:
+  healthsync_pg:

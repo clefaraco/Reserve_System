@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@theme { --font-sans: "Inter", "Segoe UI", system-ui, sans-serif; }
+@layer base {
+  body { margin: 0; }
+  button, summary { cursor: pointer; }
+  input:not([type="checkbox"]), select {
+    @apply mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-800 outline-none;
+  }
+  input:focus, select:focus { @apply border-teal-600 ring-2 ring-teal-100; }
+  input[type="checkbox"] { @apply mt-0.5 h-4 w-4 shrink-0 accent-teal-700; }
+  button:disabled { @apply cursor-not-allowed opacity-45; }
+  :focus-visible { @apply outline-2 outline-offset-4 outline-teal-700; }
+}
+@layer components {
+  .card { @apply rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8; }
+  .field { @apply block text-sm font-medium; }
+  .check { @apply flex items-start gap-3 text-sm leading-relaxed; }
+  .btn-primary { @apply inline-flex items-center justify-center gap-4 rounded-xl bg-teal-700 px-5 py-3 text-sm font-semibold text-white transition hover:bg-teal-800; }
+  .btn-secondary { @apply inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-medium text-slate-600 transition hover:border-teal-500 hover:text-teal-800; }
+}
